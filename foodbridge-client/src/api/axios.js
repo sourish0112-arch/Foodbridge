@@ -1,16 +1,7 @@
-import axios from 'axios';
-import { io } from 'socket.io-client';
+import axios from "axios";
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL,
 });
-
-API.interceptors.request.use((req) => {
-  const token = localStorage.getItem('token');
-  if (token) req.headers.Authorization = `Bearer ${token}`;
-  return req;
-});
-
-export const socket = io('http://localhost:5000');
 
 export default API;
