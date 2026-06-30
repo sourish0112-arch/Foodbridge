@@ -1,7 +1,10 @@
 import axios from "axios";
+import { io } from "socket.io-client";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+    baseURL: "https://foodbridge-43uu.onrender.com"
 });
+
+export const socket = io("https://foodbridge-43uu.onrender.com");
 
 export default API;
