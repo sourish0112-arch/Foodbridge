@@ -1,0 +1,252 @@
+import { Link } from "react-router-dom";
+import "./Home.css";
+
+
+function Home() {
+
+  return (
+
+    <div className="home">
+
+
+      {/* Floating Food Emojis */}
+
+      <div className="floating food1">🥗</div>
+      <div className="floating food2">🍅</div>
+      <div className="floating food3">🍲</div>
+      <div className="floating food4">🍱</div>
+      <div className="floating food5">🥬</div>
+      <div className="floating food6">❤️</div>
+
+
+
+      {/* Navbar */}
+
+      <nav>
+
+        <div className="logo">
+          🍱 FoodBridge
+        </div>
+
+
+        <div className="navlinks">
+
+          <a href="#mission">Mission</a>
+          <a href="#impact">Impact</a>
+          <a href="#contact">Contact</a>
+
+        </div>
+
+
+        <Link to="/login">
+
+          <button className="login-btn">
+            Login
+          </button>
+
+        </Link>
+
+
+      </nav>
+
+
+
+
+      {/* Hero Section */}
+
+      <section className="hero">
+
+
+        <div className="left">
+
+
+          <span className="badge">
+            🌱 LESS WASTE. MORE HOPE.
+          </span>
+
+
+
+          <h1>
+
+            Bridging Surplus
+            <br/>
+
+            <span>
+              Food with
+            </span>
+
+            <br/>
+
+            <b>
+              People in Need
+            </b>
+
+          </h1>
+
+
+
+          <p>
+
+            FoodBridge connects restaurants,
+            donors, NGOs, shelters and volunteers
+            to reduce food waste and make a real
+            impact on communities.
+
+          </p>
+
+
+
+
+          <div className="buttons">
+
+
+            <Link to="/register">
+
+              <button className="primary">
+                Get Started →
+              </button>
+
+            </Link>
+
+
+
+            <Link to="/impact">
+
+              <button className="secondary">
+                See Our Impact 🌱
+              </button>
+
+            </Link>
+
+
+          </div>
+
+
+        </div>
+
+
+
+
+
+        {/* Right Card */}
+
+
+        <div className="card">
+
+
+          <h2>
+            Be the reason
+          </h2>
+
+
+          <h1>
+            No Food Goes To Waste
+          </h1>
+
+
+
+          <p>
+
+            Together, we can build a world where
+            no one sleeps hungry.
+
+          </p>
+
+
+
+
+          <Link to="/login">
+
+          <button className="card-btn">
+              Login →
+          </button>
+
+          </Link>
+
+
+
+          <Link to="/register">
+
+          <button className="outline">
+              Create Account
+          </button>
+
+          </Link>
+
+
+
+          <div id="contact">
+
+
+            <h3>
+              Contact Us
+            </h3>
+
+
+            <p>
+              📧 sourish0112@gmail.com
+            </p>
+
+
+            <p>
+              📞 9284825769
+            </p>
+
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+
+
+      {/* Stats */}
+
+      <div className="stats">
+
+
+        <div>
+          🌱
+          <h3>2.5K+</h3>
+          Meals Shared
+        </div>
+
+
+        <div>
+          👥
+          <h3>150+</h3>
+          Active Donors
+        </div>
+
+
+        <div>
+          ❤️
+          <h3>80+</h3>
+          Shelters Helped
+        </div>
+
+
+        <div>
+          🌍
+          <h3>5.2K Kg</h3>
+          CO₂ Saved
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+
+  );
+
+}
+
+
+export default Home;
