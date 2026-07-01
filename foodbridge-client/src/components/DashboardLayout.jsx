@@ -26,7 +26,15 @@ function DashboardLayout({ children }) {
 
         <div className="dashboard-logo">
 
-          🍱 FoodBridge
+          <span className="logo-badge">🍱</span>
+
+          <span className="logo-text">
+
+            <span className="logo-food">Food</span>
+
+            <span className="logo-bridge">Bridge</span>
+
+          </span>
 
         </div>
 
