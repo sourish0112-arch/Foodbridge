@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from "./pages/Home";
@@ -12,7 +12,7 @@ import ImpactDashboard from './pages/ImpactDashboard';
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -37,7 +37,7 @@ function App() {
             </ProtectedRoute>
           } />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }
