@@ -253,3 +253,115 @@ label {
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
+/* ===== GLOBAL MOBILE RESPONSIVE FIX ===== */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+}
+
+
+/* Main containers */
+.container,
+.dashboard-container,
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Buttons */
+button {
+  max-width: 100%;
+}
+
+
+/* Cards */
+.cards,
+.card-container,
+.stats-container {
+  display: grid;
+  gap: 20px;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+
+  .container,
+  .dashboard-container,
+  .page-container {
+    padding: 12px;
+    width: 100%;
+  }
+
+
+  /* Navbar/Header */
+  nav,
+  .navbar,
+  .header {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+
+  .header h1,
+  h1 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+
+  /* All cards become single column */
+  .cards,
+  .card-container,
+  .stats-container {
+    grid-template-columns: 1fr !important;
+  }
+
+
+  /* Forms */
+  input,
+  textarea,
+  select {
+    width: 100% !important;
+  }
+
+
+  /* Dashboard sections */
+  section {
+    width: 100%;
+  }
+
+
+  /* Text scaling */
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 15px;
+  }
+
+}
