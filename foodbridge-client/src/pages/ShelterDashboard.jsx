@@ -85,6 +85,7 @@ const ShelterDashboard = () => {
 
   return (
     <div className="dash-shelter">
+      <DashboardNav />
 
       {/* Real-time popup */}
       {incomingDelivery && (

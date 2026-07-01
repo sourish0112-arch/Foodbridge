@@ -82,6 +82,7 @@ const RestaurantDashboard = () => {
 
   return (
     <div className="dash-restaurant">
+      <DashboardNav />
 
       {/* Notification toast */}
       {notification && (

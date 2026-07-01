@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import API, { socket } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import UserSettings from '../components/UserSettings';
+import DashboardNav from "../components/DashboardNav";
 
 const OTPDisplay = ({ otp }) => (
   <div style={{
@@ -102,6 +103,7 @@ const VolunteerDashboard = () => {
 
   return (
     <div className="dash-volunteer">
+      <DashboardNav />
 
       {notification && (
         <div style={{
