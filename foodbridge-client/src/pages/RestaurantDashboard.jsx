@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import API, { socket } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import UserSettings from '../components/UserSettings';
+import DashboardLayout from "../components/DashboardLayout";
 
 const statusColor = {
   available: '#27ae60', claimed: '#e67e22',
@@ -81,8 +82,8 @@ const RestaurantDashboard = () => {
   const active = listings.filter(l => l.status !== 'delivered').length;
 
   return (
-    <div className="dash-restaurant">
-      <DashboardNav />
+    <DashboardLayout>
+      <div className="dash-restaurant">
 
       {/* Notification toast */}
       {notification && (
@@ -290,7 +291,8 @@ const RestaurantDashboard = () => {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 };
 

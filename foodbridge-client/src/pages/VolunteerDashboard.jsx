@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import API, { socket } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import UserSettings from '../components/UserSettings';
-import DashboardNav from "../components/DashboardNav";
-
+import DashboardLayout from "../components/DashboardLayout";
 const OTPDisplay = ({ otp }) => (
   <div style={{
     marginTop: '1.25rem', padding: '1.5rem',
@@ -102,8 +101,8 @@ const VolunteerDashboard = () => {
   const completed = myPickups.filter(l => l.status === 'delivered');
 
   return (
-    <div className="dash-volunteer">
-      <DashboardNav />
+    <DashboardLayout>
+      <div className="dash-volunteer">
 
       {notification && (
         <div style={{
@@ -279,6 +278,7 @@ const VolunteerDashboard = () => {
         ))}
       </div>
     </div>
+    </DashboardLayout>
   );
 };
 

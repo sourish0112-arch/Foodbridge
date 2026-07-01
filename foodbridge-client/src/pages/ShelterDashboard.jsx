@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import API, { socket } from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import UserSettings from '../components/UserSettings';
-
+import DashboardLayout from "../components/DashboardLayout";
 const ShelterDashboard = () => {
   const { user } = useAuth();
   const [available, setAvailable] = useState([]);
@@ -84,8 +84,8 @@ const ShelterDashboard = () => {
   const delivered = myClaims.filter(l => l.status === 'delivered').length;
 
   return (
-    <div className="dash-shelter">
-      <DashboardNav />
+    <DashboardLayout>
+      <div className="dash-shelter">
 
       {/* Real-time popup */}
       {incomingDelivery && (
@@ -316,6 +316,7 @@ const ShelterDashboard = () => {
         ))}
       </div>
     </div>
+    </DashboardLayout>
   );
 };
 

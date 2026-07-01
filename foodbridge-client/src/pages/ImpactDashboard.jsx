@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import API from '../api/axios';
 import { useNavigate } from "react-router-dom";
+import DashboardLayout from '../components/DashboardLayout';
 
 // Animated counter hook
 function useCountUp(target, duration = 2000) {
@@ -81,12 +82,13 @@ const ImpactDashboard = () => {
   }, []);
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(160deg, #0f2218 0%, #1B3A2D 40%, #0d1f15 80%, #061209 100%)',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
+    <DashboardLayout>
+      <div style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(160deg, #0f2218 0%, #1B3A2D 40%, #0d1f15 80%, #061209 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
 
       {/* Animated background orbs */}
       <div style={{
@@ -323,7 +325,8 @@ const ImpactDashboard = () => {
           </>
         )}
       </div>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 };
 
