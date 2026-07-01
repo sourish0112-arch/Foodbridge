@@ -253,9 +253,27 @@ button:disabled {
 
 /* ── Page wrapper ── */
 .page {
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0 1rem 3rem;
+  padding: 0 1rem 2rem;
+}
+
+.page h2 {
+  position: relative;
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding-bottom: 0.3rem;
+}
+
+.page h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(39,174,96,0.6), transparent);
 }
 
 /* ── Stat cards ── */
