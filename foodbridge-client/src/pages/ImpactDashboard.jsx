@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import API from '../api/axios';
+import { useNavigate } from "react-router-dom";
 
 // Animated counter hook
 function useCountUp(target, duration = 2000) {
@@ -67,6 +68,7 @@ const StatCard = ({ icon, value, label, color, prefix = '', suffix = '' }) => {
 };
 
 const ImpactDashboard = () => {
+  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -133,50 +135,85 @@ const ImpactDashboard = () => {
       ))}
 
       {/* Hero */}
-      <div style={{
-        textAlign: 'center', padding: '4rem 1rem 2.5rem',
-        position: 'relative', zIndex: 1,
-        animation: 'fadeSlideUp 0.7s ease both'
-      }}>
-        <div style={{
-          display: 'inline-block',
-          fontSize: '4rem', marginBottom: '0.75rem',
-          animation: 'pulse-ring 2.5s ease-in-out infinite'
-        }}>🌍</div>
+      {/* Hero Section */}
 
-        <h1 style={{
-          fontFamily: 'Sora, sans-serif',
-          fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
-          fontWeight: 800, letterSpacing: '-0.04em',
-          background: 'linear-gradient(135deg, #ffffff 30%, #E8A838 70%, #27ae60 100%)',
-          backgroundSize: '200% auto',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          animation: 'shimmer 4s linear infinite',
-          marginBottom: '0.5rem'
-        }}>
-          City Impact Dashboard
+      <div
+        style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              maxWidth: "860px",
+              margin: "0 auto",
+              flexWrap: "wrap",
+              gap: "1rem"
+            }}
+>
+
+
+        <h1
+          style={{
+            fontFamily: "Sora, sans-serif",
+            fontSize: "clamp(1.8rem,5vw,2.8rem)",
+            fontWeight: 800,
+            background:
+              "linear-gradient(135deg,#ffffff,#E8A838,#27ae60)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "shimmer 4s infinite",
+            margin: 0
+          }}
+        >
+          🌍 City Impact Dashboard
         </h1>
 
-        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', maxWidth: '420px', margin: '0 auto' }}>
-          Every donation tracked. Every meal counted. Every life touched.
-        </p>
 
-        {/* Live indicator */}
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-          marginTop: '1.25rem', padding: '0.4rem 1rem',
-          background: 'rgba(39,174,96,0.15)', border: '1px solid rgba(39,174,96,0.3)',
-          borderRadius: '20px', color: '#27ae60', fontSize: '0.82rem', fontWeight: 600
-        }}>
-          <span style={{
-            width: '7px', height: '7px', borderRadius: '50%',
-            background: '#27ae60', display: 'inline-block',
-            animation: 'pulse-ring 1.5s ease-in-out infinite'
-          }} />
-          Live Data
-        </div>
+
+        <button
+          onClick={() => navigate("/")}
+          style={{
+            padding: "12px 25px",
+            borderRadius: "30px",
+            border: "1px solid rgba(255,255,255,0.3)",
+            background: "rgba(255,255,255,0.12)",
+            color: "white",
+            fontSize: "1rem",
+            cursor: "pointer",
+            backdropFilter: "blur(10px)",
+            transition: "0.3s"
+          }}
+
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.08)";
+          }}
+
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+
+        >
+
+          🏠 Home
+
+        </button>
+
+
       </div>
+
+
+
+<p
+  style={{
+    color: "rgba(255,255,255,0.5)",
+    fontSize: "1rem",
+    maxWidth: "420px",
+    margin: "15px auto",
+    textAlign:"center"
+  }}
+>
+
+  Every donation tracked. Every meal counted. Every life touched.
+
+</p>
 
       {/* Content */}
       <div style={{ maxWidth: '860px', margin: '0 auto', padding: '0 1rem 4rem', position: 'relative', zIndex: 1 }}>
