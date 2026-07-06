@@ -229,9 +229,11 @@ border-radius:30px;
 
 h1{
 
-font-size:60px;
+font-size:56px;
 
 line-height:1.1;
+
+max-width:640px;
 
 }
 
@@ -240,16 +242,18 @@ line-height:1.1;
 
 color:#ffffff;
 
-}
+font-size:0.9em;
 
+}
 
 
 .left h1 b{
 
 color:#8ee63f;
 
-}
+font-size:0.9em;
 
+}
 
 
 .left p{
