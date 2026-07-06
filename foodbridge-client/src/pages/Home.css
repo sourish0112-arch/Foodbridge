@@ -211,6 +211,8 @@ flex-wrap:wrap;
 
 max-width:600px;
 
+width:100%;
+
 }
 
 
@@ -223,17 +225,23 @@ padding:10px 20px;
 
 border-radius:30px;
 
+display:inline-block;
+
 }
 
 
 
 h1{
 
-font-size:56px;
+font-size:clamp(28px, 5vw, 56px);
 
-line-height:1.1;
+line-height:1.15;
 
 max-width:640px;
+
+word-wrap:break-word;
+
+overflow-wrap:break-word;
 
 }
 
@@ -258,11 +266,17 @@ font-size:0.9em;
 
 .left p{
 
-font-size:20px;
+font-size:clamp(15px, 1.6vw, 20px);
 
 line-height:1.6;
 
 color:#ddd;
+
+max-width:560px;
+
+word-wrap:break-word;
+
+overflow-wrap:break-word;
 
 }
 
@@ -276,6 +290,8 @@ display:flex;
 gap:20px;
 
 margin-top:30px;
+
+flex-wrap:wrap;
 
 }
 
@@ -317,15 +333,19 @@ text-align:center;
 
 }
 
-.stats{
+.card h1{
 
-display:grid;
+font-size:clamp(24px, 4vw, 40px);
 
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+max-width:100%;
 
-gap:20px;
+}
 
-margin-top:40px;
+.card p{
+
+font-size:clamp(15px, 1.6vw, 18px);
+
+max-width:100%;
 
 }
 
@@ -452,14 +472,6 @@ gap:40px;
 
 
 
-h1{
-
-font-size:40px;
-
-}
-
-
-
 .card{
 
 width:95%;
@@ -491,10 +503,6 @@ flex-direction:column;
 @media(max-width:600px){
   nav{
     padding:16px;
-  }
-
-  h1{
-    font-size:32px;
   }
 
   .left p,
