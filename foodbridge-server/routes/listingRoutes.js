@@ -65,13 +65,31 @@ function generateOTP() {
 
 // POST listing
 router.post('/', protect('restaurant'), async (req, res) => {
-  const { title, description, quantity, unit, category, imageUrl } = req.body;
+  const { title, description, quantity, unit, category, imageUrl, cookedHoursSince } = req.body;
   try {
+    let effectiveHours;
+    let cookedAge = Number(cookedHoursSince);
+
+    if (category === 'cooked') {
+      if (Number.isNaN(cookedAge) || cookedAge < 0) {
+        return res.status(400).json({ message: 'Please provide a valid number of hours since cooking.' });
+      }
+      if (cookedAge >= 16) {
+        return res.status(400).json({ message: 'This cooked food is stale and cannot be listed.' });
+      }
+    } else {
+      cookedAge = undefined;
+    }
+
     const { safeHours, storageAdvice } = getAIExpiry(title);
-    const expiresAt = new Date(Date.now() + safeHours * 3600 * 1000);
+    const remainingLife = category === 'cooked' ? 16 - cookedAge : safeHours;
+    effectiveHours = category === 'cooked' ? Math.min(safeHours, remainingLife) : safeHours;
+
+    const expiresAt = new Date(Date.now() + effectiveHours * 3600 * 1000);
     const listing = await Listing.create({
       restaurantId: req.user._id,
       title, description, quantity, unit, category, imageUrl,
+      cookedHoursSince: cookedAge,
       expiresAt, storageAdvice
     });
     req.app.get('io').emit('new_listing', listing);

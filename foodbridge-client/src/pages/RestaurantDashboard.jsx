@@ -18,7 +18,7 @@ const RestaurantDashboard = () => {
   const [otpErrors, setOtpErrors] = useState({});
   const [notification, setNotification] = useState(null);
   const [form, setForm] = useState({
-    title: '', description: '', quantity: '', unit: 'kg', category: 'cooked'
+    title: '', description: '', quantity: '', unit: 'kg', category: 'cooked', cookedHoursSince: '0'
   });
 
   useEffect(() => {
@@ -42,11 +42,30 @@ const RestaurantDashboard = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const cookedHours = Number(form.cookedHoursSince || 0);
+  const isCooked = form.category === 'cooked';
+  const remainingHours = Math.max(0, 16 - cookedHours);
+  const isStale = isCooked && cookedHours >= 16;
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); setLoading(true);
+    e.preventDefault();
+    if (isStale) {
+      alert('This cooked food is stale and cannot be listed. Please select fewer hours since cooking.');
+      return;
+    }
+    setLoading(true);
     try {
-      await API.post('/listings', form);
-      setForm({ title: '', description: '', quantity: '', unit: 'kg', category: 'cooked' });
+      const payload = {
+        title: form.title,
+        description: form.description,
+        quantity: form.quantity,
+        unit: form.unit,
+        category: form.category,
+        imageUrl: form.imageUrl
+      };
+      if (form.category === 'cooked') payload.cookedHoursSince = cookedHours;
+      await API.post('/listings', payload);
+      setForm({ title: '', description: '', quantity: '', unit: 'kg', category: 'cooked', cookedHoursSince: '0' });
       fetchMyListings();
     } catch (err) { alert(err.response?.data?.message || 'Failed'); }
     setLoading(false);
@@ -173,7 +192,23 @@ const RestaurantDashboard = () => {
               <option value="baked">🍞 Baked Goods</option>
             </select>
 
-            <button className="btn-primary" type="submit" disabled={loading}>
+            {isCooked && (
+              <div style={{ marginTop: '1rem' }}>
+                <label>Hours since cooked</label>
+                <select name="cookedHoursSince" value={form.cookedHoursSince} onChange={handleChange}>
+                  {Array.from({ length: 17 }, (_, i) => i).map((hour) => (
+                    <option key={hour} value={hour}>{hour} hour{hour === 1 ? '' : 's'}</option>
+                  ))}
+                </select>
+                <p style={{ marginTop: '0.75rem', color: isStale ? '#c0392b' : '#1B3A2D', fontWeight: 600 }}>
+                  {isStale
+                    ? '⚠️ This cooked food is stale and cannot be listed.'
+                    : `⏱️ This cooked food will last for about ${remainingHours} more hour${remainingHours === 1 ? '' : 's'}.`}
+                </p>
+              </div>
+            )}
+
+            <button className="btn-primary" type="submit" disabled={loading || isStale}>
               {loading ? '⏳ Posting...' : '🚀 Post Food Listing'}
             </button>
           </form>

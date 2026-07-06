@@ -72,8 +72,7 @@ function Home() {
 
             <div id="contact">
               <h3>Contact Us</h3>
-              <p>📧 sourish0112@gmail.com</p>
-              <p>📞 9284825769</p>
+              <p>📧 rihosus0112@gmail.com</p>
             </div>
           </div>
         </section>
@@ -151,8 +150,7 @@ function Home() {
 
           <div id="contact">
             <h3>Contact Us</h3>
-            <p>📧 sourish0112@gmail.com</p>
-            <p>📞 9284825769</p>
+            <p>📧 rihosus0112@gmail.com</p>
           </div>
         </div>
       </section>

@@ -7,6 +7,7 @@ const listingSchema = new mongoose.Schema({
   quantity:      { type: Number, required: true },
   unit:          { type: String, default: 'kg' },
   category:      { type: String, enum: ['cooked','raw','packaged','baked'] },
+  cookedHoursSince: { type: Number, min: 0 },
   imageUrl:      String,
   expiresAt:     Date,
   storageAdvice: String,
