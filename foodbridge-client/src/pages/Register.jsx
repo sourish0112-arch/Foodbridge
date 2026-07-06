@@ -126,6 +126,13 @@ const Register = () => {
           Already have an account?{' '}
           <Link to="/login" style={{ color: '#1B3A2D', fontWeight: 700 }}>Login</Link>
         </p>
+
+        <Link to="/" style={{
+          display: 'block', textAlign: 'center', padding: '0.75rem',
+          border: '2px solid #ccc', borderRadius: '10px',
+          color: '#1B3A2D', fontWeight: 700, textDecoration: 'none',
+          fontSize: '0.95rem', marginTop: '0.75rem', transition: 'all 0.2s'
+        }}>← Back to Home</Link>
       </div>
     </div>
   );
