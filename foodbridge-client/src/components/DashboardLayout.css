@@ -140,6 +140,23 @@ z-index:5;
 
 padding:20px;
 
+max-width:1200px;
+
+margin:0 auto;
+
+}
+
+.dashboard-metrics {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 
@@ -258,6 +275,58 @@ padding:10px;
 font-size:35px;
 
 }
+  .dashboard-metrics{
+    gap:1rem;
+  }
 
+  .grid-two-col{
+    grid-template-columns:1fr;
+  }
 
+  .dash-restaurant .page{
+    padding:0;
+  }
+
+  .dash-restaurant .card{
+    width:100%;
+    padding:24px;
+  }
+
+}
+
+@media(max-width:1024px){
+  .dashboard-content{
+    max-width:100%;
+    padding:16px;
+  }
+
+  .dashboard-top{
+    align-items:flex-start;
+  }
+
+  .dashboard-metrics{
+    flex-direction:column;
+  }
+
+  .grid-two-col{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  .dashboard-page{
+    padding:16px;
+  }
+
+  .dashboard-logo{
+    font-size:22px;
+  }
+
+  .dash-food{
+    display:none;
+  }
+
+  .dashboard-content{
+    padding:12px;
+  }
 }

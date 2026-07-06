@@ -134,7 +134,7 @@ const RestaurantDashboard = () => {
             </h1>
             <UserSettings />
           </div>
-          <div style={{ display: 'flex', gap: '2rem', marginTop: '1rem' }}>
+          <div className="dashboard-metrics">
             <div>
               <div style={{ fontSize: '1.6rem', fontWeight: 800 }}>{listings.length}</div>
               <div style={{ opacity: 0.7, fontSize: '0.8rem' }}>Total Posts</div>
@@ -167,7 +167,7 @@ const RestaurantDashboard = () => {
             <input name="description" placeholder="e.g. Freshly cooked, no onion/garlic"
               value={form.description} onChange={handleChange} />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div className="grid-two-col">
               <div>
                 <label>Quantity</label>
                 <input name="quantity" type="number" placeholder="e.g. 5"
