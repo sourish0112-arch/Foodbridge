@@ -254,4 +254,23 @@ router.patch('/:id/reject', protect('shelter'), async (req, res) => {
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
+// DELETE listing (restaurant owner only)
+router.delete('/:id', protect('restaurant'), async (req, res) => {
+  try {
+    const listing = await Listing.findById(req.params.id);
+    if (!listing) return res.status(404).json({ message: 'Listing not found' });
+    if (!listing.restaurantId.equals(req.user._id)) {
+      return res.status(403).json({ message: 'Not authorized to delete this listing' });
+    }
+    if (listing.status !== 'available') {
+      return res.status(400).json({ message: 'Only available listings can be deleted' });
+    }
+
+    await Listing.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Listing deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

@@ -78,6 +78,17 @@ const RestaurantDashboard = () => {
     setOtpErrors({ ...otpErrors, [id]: '' });
   };
 
+  const deleteListing = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this listing?')) return;
+    try {
+      await API.delete(`/listings/${id}`);
+      setListings(listings.filter(l => l._id !== id));
+      setNotification({ type: 'success', message: 'Listing deleted successfully.' });
+    } catch (err) {
+      alert(err.response?.data?.message || 'Delete failed');
+    }
+  };
+
   const verifyOTP = async (id) => {
     const otp = otpInputs[id];
     if (!otp || otp.length !== 6) {
@@ -317,6 +328,25 @@ const RestaurantDashboard = () => {
                   </p>
                 )}
               </div>
+              {l.status === 'available' && (
+                <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
+                  <button
+                    onClick={() => deleteListing(l._id)}
+                    style={{
+                      padding: '0.75rem 1.1rem',
+                      borderRadius: '10px',
+                      border: 'none',
+                      background: '#e74c3c',
+                      color: 'white',
+                      cursor: 'pointer',
+                      fontWeight: 700,
+                      transition: 'background 0.2s'
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
 
               <span className="status-badge"
                 style={{ background: statusColor[l.status], marginLeft: '1rem' }}>
