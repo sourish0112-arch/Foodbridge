@@ -1,17 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function DashboardNav() {
 
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
 
-  const logout = () => {
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
+  const handleLogout = () => {
+    logout();
     navigate("/");
-
   };
 
 
@@ -63,7 +61,7 @@ function DashboardNav() {
 
       <button
 
-        onClick={logout}
+        onClick={handleLogout}
 
         style={{
 
