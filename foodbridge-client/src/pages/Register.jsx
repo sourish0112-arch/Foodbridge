@@ -22,13 +22,51 @@ const Register = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', email: '', phoneNumber: '', websiteLink: '', password: '', role: 'restaurant', address: '' });
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({ phoneNumber: '', password: '' });
+  const [touched, setTouched] = useState({ phoneNumber: false, password: false });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'phoneNumber') {
+      const numeric = value.replace(/[^0-9+\s()-]/g, '');
+      setForm({ ...form, [name]: numeric });
+      if (fieldErrors.phoneNumber && touched.phoneNumber) {
+        setFieldErrors({ ...fieldErrors, phoneNumber: '' });
+      }
+    } else {
+      setForm({ ...form, [name]: value });
+      if (name === 'password' && fieldErrors.password && touched.password) {
+        setFieldErrors({ ...fieldErrors, password: '' });
+      }
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    if (name === 'phoneNumber' || name === 'password') {
+      setTouched({ ...touched, [name]: true });
+    }
+  };
+
+  const validateForm = () => {
+    const errors = { phoneNumber: '', password: '' };
+    if (form.phoneNumber && !/^[0-9+\s()-]+$/.test(form.phoneNumber)) {
+      errors.phoneNumber = 'Please use only digits, spaces, +, -, and parentheses.';
+    }
+    if (form.password.trim().length < 6) {
+      errors.password = 'Password must be at least 6 characters.';
+    }
+    setFieldErrors(errors);
+    return !errors.phoneNumber && !errors.password;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); setError('');
+    setError('');
+    setTouched({ phoneNumber: true, password: true });
+    if (!validateForm()) return;
+    setLoading(true);
     try {
       const { data } = await API.post('/auth/register', {
         name: form.name, email: form.email, phoneNumber: form.phoneNumber, websiteLink: form.websiteLink, password: form.password,
@@ -102,7 +140,19 @@ const Register = () => {
           <input type="email" name="email" placeholder="you@example.com" value={form.email} onChange={handleChange} required />
 
           <label>Phone Number</label>
-          <input name="phoneNumber" placeholder="e.g. +91 9876543210" value={form.phoneNumber} onChange={handleChange} />
+          <input
+            className={fieldErrors.phoneNumber && touched.phoneNumber ? 'invalid-input' : ''}
+            name="phoneNumber"
+            placeholder="e.g. +91 9876543210"
+            value={form.phoneNumber}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {fieldErrors.phoneNumber && touched.phoneNumber && (
+            <div className="field-error">
+              {fieldErrors.phoneNumber}
+            </div>
+          )}
 
           {(form.role === 'restaurant' || form.role === 'shelter') && (
             <>
@@ -112,7 +162,21 @@ const Register = () => {
           )}
 
           <label>Password</label>
-          <input type="password" name="password" placeholder="Min 6 characters" value={form.password} onChange={handleChange} required />
+          <input
+            className={fieldErrors.password && touched.password ? 'invalid-input' : ''}
+            type="password"
+            name="password"
+            placeholder="Min 6 characters"
+            value={form.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            required
+          />
+          {fieldErrors.password && touched.password && (
+            <div className="field-error">
+              {fieldErrors.password}
+            </div>
+          )}
 
           <label>Address</label>
           <input name="address" placeholder="e.g. Koregaon Park, Pune" value={form.address} onChange={handleChange} />
